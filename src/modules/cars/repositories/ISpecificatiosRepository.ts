@@ -1,15 +1,14 @@
-import { Category } from "../model/Category";
-import { Specification } from "../model/Specification";
+import { Specification } from "../entities/Specification";
 
-interface ICreateSpecificatiosDTO{
-    name:string;
-    description: string;
+interface ICreateSpecificatiosDTO {
+  name: string;
+  description: string;
 }
 
 interface ISpecificatiosRepository {
-    findByName(name:string):Specification;
-    list():Specification[];
-    create({name,description}:ICreateSpecificatiosDTO):void;
+  findByName(name: string): Promise<Specification>;
+  list(): Promise<Specification[]>;
+  create({ name, description }: ICreateSpecificatiosDTO): Promise<void>;
 }
 
-export {ISpecificatiosRepository,ICreateSpecificatiosDTO};
+export { ISpecificatiosRepository, ICreateSpecificatiosDTO };
