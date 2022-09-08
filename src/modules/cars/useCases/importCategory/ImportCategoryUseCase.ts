@@ -2,7 +2,7 @@ import { parse as csvParse } from "csv-parse";
 import fs from "fs";
 import { inject, injectable } from "tsyringe";
 
-import { ICategoriesRepository } from "../../repositories/ICategoryRepository";
+import { ICategoriesRepository } from "@modules/cars/repositories/ICategoryRepository";
 
 interface IImportCategory {
   name: string;
@@ -15,6 +15,7 @@ class ImportCategoryUseCase {
     private categoriesRepository: ICategoriesRepository
   ) {}
 
+  // eslint-disable-next-line no-undef
   loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path);
@@ -41,6 +42,7 @@ class ImportCategoryUseCase {
         });
     });
   }
+  // eslint-disable-next-line no-undef
   async execute(file: Express.Multer.File): Promise<void> {
     const categories = await this.loadCategories(file);
     categories.map(async (category) => {
